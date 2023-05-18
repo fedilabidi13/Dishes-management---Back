@@ -24,6 +24,7 @@ public class PlatImpl implements PlatService {
     Cloudinary cloudinary;
     @Override
     public Plat addPlat(Plat plat, MultipartFile file) throws IOException {
+        plat.setPrix(plat.getPrix()+" TND");
         Media media = new Media();
         String url = cloudinary.uploader()
                 .upload(file.getBytes(),
@@ -38,6 +39,7 @@ public class PlatImpl implements PlatService {
 
     @Override
     public Plat update(Plat plat, MultipartFile file) throws IOException {
+        plat.setPrix(plat.getPrix()+" TND");
         Media media = new Media();
         String url = cloudinary.uploader()
                 .upload(file.getBytes(),
