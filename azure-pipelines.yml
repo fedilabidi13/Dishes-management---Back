@@ -35,9 +35,9 @@ steps:
 - task: SonarQubeAnalyze@5
   displayName: 'Run SonarQube Analysis'
 
-- task: PublishCodeCoverageResults@1
+- task: PublishCodeCoverageResults@2
   inputs:
     codeCoverageTool: 'JaCoCo'  # Specify the code coverage tool
-    codeCoverageReportPath: '**/target/site/jacoco/jacoco.xml'  # Adjust path based on your project structure
+    summaryFileLocation: '**/target/site/jacoco/jacoco.xml'  # Adjust path based on your project structure
+    reportDirectory: '$(System.DefaultWorkingDirectory)/target/site/jacoco'  # Directory containing the report files
     failIfCoverageEmpty: true  # Fail the build if no coverage found
-    codeCoverageReportDirectory: '$(System.DefaultWorkingDirectory)/target/site/jacoco'  # Set output directory for reports
