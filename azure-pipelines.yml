@@ -5,11 +5,11 @@ pool:
   name: Ubuntu24-VM-Pool
 
 steps:
-# Step 1: Add Java Tool Installer task (optional, but can be added for clarity)
+# Step 1: Install Java JDK 17
 - task: JavaToolInstaller@0
   inputs:
-    versionSpec: '17'  # Specify the Java version if needed
-    jdkArchitecture: 'x64'
+    versionSpec: '17'  # Specify the Java version
+    jdkArchitectureOption: 'x64'  # Specify the architecture (x64 or x86)
   displayName: 'Install Java JDK 17'
 
 # Step 2: Check Maven and Java versions
