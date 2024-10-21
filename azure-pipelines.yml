@@ -35,19 +35,9 @@ steps:
 - task: SonarQubeAnalyze@5
   displayName: 'Run SonarQube Analysis'
 
-# Step 5: Publish JaCoCo test results to Azure DevOps
 - task: PublishCodeCoverageResults@1
   inputs:
-    codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/target/site/jacoco/jacoco.xml'
-  displayName: 'Publish JaCoCo Code Coverage Report'
-
-# Step 6: Publish SonarQube Quality Gate Results
-- task: SonarQubePublish@5
-  displayName: 'Publish SonarQube Quality Gate Result'
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/target/site/jacoco/jacoco.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/target/site/jacoco'
-  displayName: 'Publish JaCoCo Code Coverage Report'
+    codeCoverageTool: 'JaCoCo'  # Specify the code coverage tool
+    codeCoverageReportPath: '**/target/site/jacoco/jacoco.xml'  # Adjust path based on your project structure
+    failIfCoverageEmpty: true  # Fail the build if no coverage found
+    codeCoverageReportDirectory: '$(System.DefaultWorkingDirectory)/target/site/jacoco'  # Set output directory for reports
