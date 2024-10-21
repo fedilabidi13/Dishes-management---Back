@@ -10,6 +10,7 @@ steps:
   inputs:
     versionSpec: '17'  # Specify the Java version
     jdkArchitectureOption: 'x64'  # Specify the architecture (x64 or x86)
+    jdkSourceOption: 'PreInstalled'
   displayName: 'Install Java JDK 17'
 
 # Step 2: Check Maven and Java versions
