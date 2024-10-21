@@ -7,7 +7,7 @@ parameters:
    
 trigger:
   - master
-
+pool: Ubuntu24-VM-Pool
 pr: none
 
 variables:
