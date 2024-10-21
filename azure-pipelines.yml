@@ -7,12 +7,6 @@ pool:
   name: Ubuntu24-VM-Pool
 
 steps:
-  # Step 1: Add Java Tool Installer task
-  - task: JavaToolInstaller@0
-    inputs:
-      versionSpec: '11'  # Set the Java version to use, update as needed
-      jdkArchitecture: 'x64'
-    displayName: 'Install Java JDK'
 
   # Step 2: Check Maven and Java versions
   - script: |
