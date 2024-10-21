@@ -5,15 +5,7 @@ pool:
   name: Ubuntu24-VM-Pool
 
 steps:
-# Step 1: Install Java JDK 17
-- task: JavaToolInstaller@0
-  inputs:
-    versionSpec: '17'  # Specify the Java version
-    jdkArchitectureOption: 'x64'  # Specify the architecture (x64 or x86)
-    jdkSourceOption: 'JdkFromVersion'  
-  displayName: 'Install Java JDK 17'
-
-# Step 2: Check Maven and Java versions
+# Step 1: Check Maven and Java versions
 - script: |
     echo "Checking Maven version:"
     mvn -v
@@ -21,7 +13,7 @@ steps:
     java -version
   displayName: 'Check Maven and Java Versions'
 
-# Step 3: Prepare SonarQube for Code Quality Analysis
+# Step 2: Prepare SonarQube for Code Quality Analysis
 - task: SonarQubePrepare@5
   inputs:
     SonarQube: 'my-cnx'  # SonarQube service connection name
@@ -34,22 +26,22 @@ steps:
       sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
   displayName: 'Prepare SonarQube for Code Quality Analysis'
 
-# Step 4: Build the Java project and generate JaCoCo code coverage report
+# Step 3: Build the Java project and generate JaCoCo code coverage report
 - script: |
     mvn clean verify jacoco:report
   displayName: 'Build Java App with Maven and Generate JaCoCo Report'
 
-# Step 5: Execute SonarQube analysis
+# Step 4: Execute SonarQube analysis
 - task: SonarQubeAnalyze@5
   displayName: 'Run SonarQube Analysis'
 
-# Step 6: Publish JaCoCo test results to Azure DevOps
+# Step 5: Publish JaCoCo test results to Azure DevOps
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'JaCoCo'
     summaryFileLocation: '$(System.DefaultWorkingDirectory)/target/site/jacoco/jacoco.xml'
   displayName: 'Publish JaCoCo Code Coverage Report'
 
-# Step 7: Publish SonarQube Quality Gate Results
+# Step 6: Publish SonarQube Quality Gate Results
 - task: SonarQubePublish@5
   displayName: 'Publish SonarQube Quality Gate Result'
